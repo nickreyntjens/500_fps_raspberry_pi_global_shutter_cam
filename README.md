@@ -170,6 +170,9 @@ unsigned char *value_xy_u = buf + start_of_U + (y / 2) * (nStride / 2) + (x / 2)
 unsigned char *value_xy_v = buf + start_of_V + (y / 2) * (nStride / 2) + (x / 2);
 ```
 
+## Width vs Height
+Width and height are not treated symmetrically by a camera sensor. The sensor reads out one line (width) at a time and then transfers that line to the CPU, while the height is simply the total number of lines. Because each line transfer includes overhead (such as start and stop bytes), increasing the width adds less extra overhead compared to increasing the height. Therefore, you can increase the width more than the height before encountering a performance penalty.
+
 ## Project Goals
 
 - **High Frame-Rate Capture:**  
