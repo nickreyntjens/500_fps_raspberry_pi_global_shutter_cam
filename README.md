@@ -16,7 +16,7 @@ The objectives of this project are to:
   - Computes positional errors relative to the center of the viewport.
   - Outputs correction PID commands to servos that steer a mirror, keeping the insect centered.
 - **Record** the modified video stream to disk for further analysis.
-- **Assess** whether fast-moving insects (e.g., Colorado beetles) can be reliably tracked as a precursor for a laser-based pest control system.
+- **Assess** whether high-contrast insects (e.g., Colorado beetles -- oragne thorax on green leafy background) can be reliably tracked as a precursor for a laser-based pest control system.
 
 ## Hardware Setup
 
