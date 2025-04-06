@@ -250,13 +250,5 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 
 For questions or to contribute, please contact:  
-- **Name:** [Your Name]  
-- **Email:** [your.email@example.com]
-
----
-
-*Note: This README is a preliminary draft. More details—such as exact OS configurations, performance benchmarks, and final tracking outcomes—will be added as the project evolves.*
-
----
-
-You now have a comprehensive README that explains the hardware, camera configuration (including the media-ctl setup with GScrop), the complete command pipeline (with breakdown), storage optimizations using a RAM disk, and troubleshooting details regarding YUV row padding.
+- **Name:** Nick Reyntjens
+- **Email:** nick.reyntjens@gmail.com
