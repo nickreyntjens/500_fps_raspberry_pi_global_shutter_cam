@@ -22,7 +22,7 @@ The objectives of this project are to:
 
 ![overview](hardware_photos/overview.jpeg)
 ![lens_and_adapter](hardware_photos/lens_and_adapter.jpeg)
-![hdmi_to_usbc](hardware_photos/hdmi_to_usbc.jpeg)
+![hdmi_to_usbc](hardware_photos/hdmi_to_usbc2.jpeg)
 ![pi_detail](hardware_photos/pi_detail.jpeg)
 
 1. **Raspberry Pi 5 (8 GB, ARM A76 @ 2.4 GHz)**  
