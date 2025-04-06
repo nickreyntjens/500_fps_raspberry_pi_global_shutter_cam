@@ -60,6 +60,8 @@ After running `GScrop`, verify that the camera is correctly configured in the OS
 
 This command will list the cameras recognized by libcamera. Ensure that your global shutter camera appears with the expected settings before proceeding.
 
+![list-cameras](terminal_pictures/list-cameras.png)
+
 ## Software Pipeline
 
 1. **Camera Feed Acquisition**  
