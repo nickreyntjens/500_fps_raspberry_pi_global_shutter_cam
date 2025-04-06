@@ -1,0 +1,23 @@
+#!/bin/bash
+# shellcheck disable=SC2154
+# (silence shellcheck wrt $cam1 environment variable)
+if [[ $# -lt 4 ]];  then  echo "Format: [narrow=1] [cam1=1] $0 width height framerate ms [us]"; exit;  fi
+if [[ "$(( $1 % 2 ))" -eq 1 ]];  then echo "width has to be even"; exit;  fi
+if [[ "$(( $2 % 2 ))" -eq 1 ]];  then echo "height has to be even"; exit;  fi
+export SHTR=""; if [[ $# -gt 4 ]]; then SHTR="--shutter"; fi
+export workaround=""; if [[ "" != "$(grep '=bookworm' /etc/os-release)" ]]; then workaround="--no-raw"; fi
+export d=10; if [[ "" != "$(grep "Revision.*: ...17.$" /proc/cpuinfo)" ]]; then if [[ "$cam1" == "" ]]; then d=10; else d=11; fi; fi
+for((m=0; m<=5; ++m))
+do
+    media-ctl -d /dev/media$m --set-v4l2 "'imx296 $d-001a':0 [fmt:SBGGR10_1X10/${1}x${2} crop:($(( (1440 - $1) / 2 )),$(( (1088 - $2) / 2 )))/${1}x$2]" -v; [ $? -eq 0 ] && break
+done
+libcamera-hello --list-cameras  ;echo
+rm -f /dev/shm/tst.pts
+if [[ "" != "$(grep "Revision.*: ...17.$" /proc/cpuinfo)" ]]
+then
+  rpicam-vid "$workaround" ${cam1:+--camera 1} --width "$1" --height "$2" --denoise cdn_off --framerate "$3" -t "$4" "$SHTR" "$5" -o /dev/shm/tst${cam1:+1}.mp4 -n  ;echo 
+~/venv/bin/python ~/rpicam-apps/utils/timestamp.py --plot ${narrow:+--narrow} /dev/shm/tst${cam1:+1}.mp4
+else
+  libcamera-vid "$workaround" --width "$1" --height "$2" --denoise cdn_off --framerate "$3" --save-pts /dev/shm/tst.pts -t "$4" "$SHTR" "$5" -o /dev/shm/tst.h264 -n  ;echo 
+  rm -f tstamps.csv && ptsanalyze /dev/shm/tst.pts
+fi
