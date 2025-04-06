@@ -4,7 +4,7 @@ Below is the final README content in Markdown format. You can save this as `READ
 
 # High-Speed Insect Tracking on Raspberry Pi 5
 
-This project evaluates the feasibility of tracking small insects—such as Colorado beetles—at over 500 frames per second (FPS) using a Raspberry Pi 5 with a global shutter camera. The ultimate goal is to develop a laser-based system capable of detecting and neutralizing pests with high precision.
+This project evaluates the feasibility of tracking small insects—such as Colorado beetles—at over 500 frames per second (FPS) using a Raspberry Pi 5 with a global shutter camera. The ultimate goal is to develop a laser-based system capable of detecting and neutralizing pests with high precision, as part of photonic insecticides developements.
 
 ## Project Overview
 
