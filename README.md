@@ -4,7 +4,7 @@ Below is the final README content in Markdown format. You can save this as `READ
 
 # High-Speed Insect Tracking on Raspberry Pi 5
 
-This project evaluates the feasibility of tracking small insects—such as Colorado beetles—at over 500 frames per second (FPS) using a Raspberry Pi 5 with a global shutter camera. The ultimate goal is to develop a laser-based system capable of detecting and neutralizing pests with high precision, as part of photonic insecticides developements.
+This project evaluates the feasibility of tracking small insects—such as Colorado beetles—at over 500 frames per second (FPS) using a Raspberry Pi 5 with a global shutter camera. The ultimate goal is to develop a laser-based system capable of detecting and neutralizing pests with high precision, as part of photonic insecticides developements (https://photonicinsecticides.com).
 
 ## Project Overview
 
@@ -150,6 +150,8 @@ And display it with:
 
     pgmtoppm < frame.pgm | pnmtopng > frame.pgm.png
 
+This command converts a grayscale PGM image (frame.pgm) into a PNG image (frame.pgm.png) by first converting it to a PPM format with pgmtoppm and then piping the result to pnmtopng.
+
 Additional details and discussion about this issue are available on our project forum: https://forums.raspberrypi.com/viewtopic.php?p=2305225#p2305225
 
 
@@ -199,6 +201,25 @@ Width and height are not treated symmetrically by a camera sensor. The sensor re
 
 - **Hardware Refinements:**  
   Experiment with different lenses or camera modules to optimize image clarity, field of view, and overall performance at extreme frame rates.
+
+## FPGA accelleration
+
+In cases where the insect would not have a very distincive color that can be easily isolated from the background, an fgpa chip is able to run a mini neural network and get the result in under 1 ms. For example the FINN framework seems like a good fit for this.
+
+https://www.youtube.com/watch?v=zw2aG4PhzmA
+https://xilinx.github.io/finn/
+
+## Beam steering and laser safety
+
+Once the insect can be tracked we need a safe beam, and a fast mirror to keep the beam on the target.
+In the laser safety project, once can calculate the nominal safety zone for a given laser, focal lenght and initial beam diameter: https://github.com/nickreyntjens/laser_safety_calculator.py
+
+For beam steering, a small mems mirror can be used since it can be shown that a small initial beam diameter like 8 mm, only has a nominal safety zone of a 2.34 meter (so, if one stays 2.4 meter from the laser source, a direct hit in your eye is harmless -- but of course this theoretical, since the device will never aim at an eye! Consult the full safety stack in order for form a correct idea). 
+
+A 7.5 diameter mems from www.mirrorcletech.com, can move a beam 1 mm @ 1 meter in 0.3 ms. So the beam can track an object moving at 12 km/h at one meter. It likely can track faster objects at 2 meter and so on.
+https://www.youtube.com/watch?v=yGcTAi7U9hw
+
+An energy calculator app will likely also be built, but to give you a sence of this, one solar panel can keep one drone in the air, and the energy to shoot an insect is negligable to the energy required to fly. 
 
 ## References
 
