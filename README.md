@@ -163,6 +163,19 @@ The complete command for video capture and processing is split into several comp
 - **Hardware Refinements:**  
   Experiment with different lenses or camera modules to optimize image clarity, field of view, and overall performance at extreme frame rates.
 
+## References
+
+Sample yuv brightness : https://github.com/Hermann-SW2/userland/blob/master/host_applications/linux/apps/hello_pi/i420toh264/sample_yuv_brightness.c
+
+GScrop: https://gist.github.com/Hermann-SW/e6049fe1a24fc2b5a53c654e0e9f6b9c
+
+Trouble shooting (details about YUV padding issue): https://forums.raspberrypi.com/viewtopic.php?p=2305225#p2305225
+
+## Special thanks
+
+This project would not have been possible without the vital help of
+stamm wilbrandt (https://stamm-wilbrandt.de/en/), who supplied the key commands and laid the groundwork that allows this project to function, in his many years of contributions.
+
 ## Contributing
 
 Contributions, suggestions, and improvements are welcome. Please open an issue or submit a pull request with your ideas and enhancements.
