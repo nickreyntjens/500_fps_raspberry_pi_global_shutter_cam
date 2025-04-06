@@ -22,7 +22,7 @@ The objectives of this project are to:
 
 ![overview](hardware_photos/overview.jpeg)
 ![lens_and_adapter](hardware_photos/lens_and_adapter.jpeg)
-![hdmi_to_usbc](hardware_photos/hdmi_to_usbc.jpeg)
+![hdmi_to_usbc](hardware_photos/hdmi_to_usbc2.jpeg)
 ![pi_detail](hardware_photos/pi_detail.jpeg)
 
 1. **Raspberry Pi 5 (8 GB, ARM A76 @ 2.4 GHz)**  
@@ -39,7 +39,8 @@ The objectives of this project are to:
 
 5. **Video Output/Display Setup:**  
    - A mini HDMI to HDMI adapter connected to the Raspberry Pi.
-   - An HDMI to USB‑C cable feeds the signal into an M1 MacBook.
+   - Male to Male hdmi connector
+   - An HDMI to USB‑C cable feeds the signal into an M1 MacBook. (Newhope Video Capture Card, 4K HDMI to USB C 3.0 Capture Card, 1080p HD 60fps Live)
    - OBS (Open Broadcaster Software) on the MacBook captures the USB‑C input, providing real-time viewing of the Raspberry Pi’s desktop (Video Capture Device >> Properties >> Usb C).
 
 6. **Input Devices:**  
