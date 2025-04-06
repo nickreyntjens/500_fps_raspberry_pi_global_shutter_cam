@@ -134,7 +134,7 @@ For efficiency in modern CPU processing, each plane is padded so that its row le
 
 One frame of 224x96@536fps video is stored as 
 - Y Plane: The expected row length is 224 bytes (1 byte per pixel), but each row is padded to 256 bytes (to  align to a 64-byte boundary). With 96 rows, the Y plane uses: 256 bytes/row × 96 rows = 24,576 bytes.
-- U and V Planes: In YUV420, the chroma channels are subsampled by 2 in both dimensions. That gives a resolution of 112×48 for each chroma plane. Each row in these planes is padded to 128 bytes. Thus, each chroma plane uses: 128 bytes/row × 48 rows = 6,144 bytes.
+- U and V Planes: In YUV420, the chroma channels are subsampled by 2 in both dimensions. That gives a resolution of 112×48 for each chroma plane. Each row in these planes is padded to 128 bytes (or 64?? -- likely 64). Thus, each chroma plane uses: 128 bytes/row × 48 rows = 6,144 bytes.
 So, one full frame is 24,576 (Y) + 6,144 (U) + 6,144 (V) = 36,864 bytes.
 
 When running a command such as:
@@ -161,17 +161,20 @@ int align_up(int x, int y)
   return ((x-1)|((1<<y)-1))+1; // round of to 2^y (e.g. if y is 5 = 32)
 }
 
-nStride      = align_up(width, 5);  // byte align to 32 bytes -- but, should be 384 maybe??
+// likely correct ... not 100% sure
+nStride      = align_up(width, 6);  // byte align to 64 bytes
 nSliceHeight = align_up(height, 4); // byte align to 16 bytes
-nLenY = nStride * nSliceHeight;  
-nLenU = nLenV = nLenY / 4;
+nLenY = nStride * nSliceHeight;                            // 256 bytes/row × 96 rows = 24,576 bytes
+nStrideUV = align_up(width / 2, 6) 
+nLenU = nStrideUV * align_up(height / 2, 4);  // 128 bytes/row × 48 rows = 6,144 bytes
+nLenV = nStrideUV * align_up(height / 2, 4);  // 128 bytes/row × 48 rows = 6,144 bytes
 
 int start_of_U = align_up(nLenY, 7);                 // Compute U plane starting offset, aligned to 128 bytes.
 int start_of_V = start_of_U + align_up(nLenY/4, 7);  // Compute V plane starting offset, aligned to 128 bytes.
 
-unsigned char *value_xy_luminance = buf + y * nStride + x;
-unsigned char *value_xy_u = buf + start_of_U + (y / 2) * (nStride / 2) + (x / 2);
-unsigned char *value_xy_v = buf + start_of_V + (y / 2) * (nStride / 2) + (x / 2);
+unsigned char *value_xy_luminance = frame_bytes_buf + y * nStride + x;
+unsigned char *value_xy_u = frame_bytes_buf + start_of_U + (y / 2) * nStrideUV + (x / 2);
+unsigned char *value_xy_v = frame_bytes_buf + start_of_V + (y / 2) * nStrideUV + (x / 2);
 ```
 
 ## Width vs Height
