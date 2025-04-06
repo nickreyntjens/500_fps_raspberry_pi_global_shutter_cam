@@ -20,10 +20,10 @@ The objectives of this project are to:
 
 ## Hardware Setup
 
-![overview](overview.jpeg)
-![lens_and_adapter](lens_and_adapter.jpeg)
-![hdmi_to_usbc](hdmi_to_usbc.jpeg)
-![pi_detail](pi_detail.jpeg)
+![overview](hardware_photos/overview.jpeg)
+![lens_and_adapter](hardware_photos/lens_and_adapter.jpeg)
+![hdmi_to_usbc](hardware_photos/hdmi_to_usbc.jpeg)
+![pi_detail](hardware_photos/pi_detail.jpeg)
 
 1. **Raspberry Pi 5 (8 GB, ARM A76 @ 2.4 GHz)**  
    The main computing platform handling both video capture and real-time processing.
