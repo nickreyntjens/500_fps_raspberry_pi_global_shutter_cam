@@ -146,6 +146,30 @@ The complete command for video capture and processing is split into several comp
    - Reads input from standard input (`-i -`) and encodes the output using the H.264 codec (`libx264`) with lossless settings (`-qp 0`).
    - Overwrites the file `tst.mp4` (`-y`) and suppresses log output (`-loglevel quiet`).
 
+## YUV420 format
+YUV420 is a color format that consists of three separate planes: one for luminance (Y), one for blue-difference chrominance (U), and one for red-difference chrominance (V). In this format, for every 2×2 block of luma pixels (i.e. 4 pixels), there is only 1 U sample and 1 V sample. This reduction in chrominance sampling is possible because the human visual system is more sensitive to brightness (luma) than to color details, which allows for efficient compression without a noticeable loss in perceived quality.
+
+For efficiency in modern CPU processing, each plane is padded so that its row length is a multiple of 128 bytes. For instance, if you have an image row that is 224 bytes long, it will be padded with zeros until it reaches 384 bytes, ensuring optimal memory alignment and processing speed.
+
+```C
+int align_up(int x, int y)
+{
+  return ((x-1)|((1<<y)-1))+1; // round of to 2^y (e.g. if y is 5 = 32)
+}
+
+nStride      = align_up(width, 5);  // byte align to 32 bytes -- but, should be 384 maybe??
+nSliceHeight = align_up(height, 4); // byte align to 16 bytes
+nLenY = nStride * nSliceHeight;  
+nLenU = nLenV = nLenY / 4;
+
+int start_of_U = align_up(nLenY, 7);                 // Compute U plane starting offset, aligned to 128 bytes.
+int start_of_V = start_of_U + align_up(nLenY/4, 7);  // Compute V plane starting offset, aligned to 128 bytes.
+
+unsigned char *value_xy_luminance = buf + y * nStride + x;
+unsigned char *value_xy_u = buf + start_of_U + (y / 2) * (nStride / 2) + (x / 2);
+unsigned char *value_xy_v = buf + start_of_V + (y / 2) * (nStride / 2) + (x / 2);
+```
+
 ## Project Goals
 
 - **High Frame-Rate Capture:**  
