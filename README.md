@@ -222,7 +222,9 @@ For beam steering, a small mems mirror can be used since it can be shown that a 
 A 7.5 diameter mems from www.mirrorcletech.com, can move a beam 1 mm @ 1 meter in 0.3 ms. So the beam can track an object moving at 12 km/h at one meter. It likely can track faster objects at 2 meter and so on.
 https://www.youtube.com/watch?v=yGcTAi7U9hw
 
-An energy calculator app will likely also be built, but to give you a sence of this, one solar panel can keep one drone in the air, and the energy to shoot an insect is negligable to the energy required to fly. 
+An energy calculator app will likely also be built, but to give you a sence of this, one solar panel can keep one drone in the air, and the energy to shoot an insect is negligable to the energy required to fly.
+
+A companion project to this project is the making or a large movable mirror, that can be moved with servos and hopefully has a latency of around 3 ms.
 
 ## References
 
