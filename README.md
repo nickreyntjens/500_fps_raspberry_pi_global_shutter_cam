@@ -56,9 +56,11 @@ Before capturing video, it is essential to configure the camera with all necessa
 **Verification Step:**  
 After running `GScrop`, verify that the camera is correctly configured in the OS by executing:
 
-    libcamera-hello --list-cameras
+    rpicam-vid --list-cameras
 
 This command will list the cameras recognized by libcamera. Ensure that your global shutter camera appears with the expected settings before proceeding.
+
+![list-cameras](terminal_pictures/list-cameras.png)
 
 ## Software Pipeline
 
