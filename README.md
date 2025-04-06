@@ -98,25 +98,6 @@ This command will list the cameras recognized by libcamera. Ensure that your glo
 
    *Note:* Data stored on a RAM disk is volatile and will be lost upon shutdown. Be sure to copy your files to permanent storage after capture.
 
-## Alignment Warning and YUV Padding Issue
-
-When running a command such as:
-
-    rpicam-vid --no-raw --codec yuv420 --width 224 --height 96 --denoise cdn_off --framerate 536 -t 1000 -o tst.yuv420
-
-**Warning:**  
-The Raspberry Pi 5 (unlike the Pi 4) prefers 64-byte alignment. To achieve 64-byte alignment in the U and V planes, the Y plane is padded to 128-byte alignment. As a result, each row of the Y component contains 384 bytes instead of the expected 288 bytes. This extra padding is important to consider when processing the YUV data.
-
-For example, to extract the first frame from the YUV file, use:
-
-    (echo -e "P5\n256 96\n255\n" && head --bytes $((256*96)) tst.yuv420) > frame.pgm
-
-And display it with:
-
-    pgmtoppm < frame.pgm | pnmtopng > frame.pgm.png
-
-Additional details and discussion about this issue are available on our project forum.
-
 ## Command Breakdown
 
 The complete command for video capture and processing is split into several components:
@@ -150,6 +131,27 @@ The complete command for video capture and processing is split into several comp
 YUV420 is a color format that consists of three separate planes: one for luminance (Y), one for blue-difference chrominance (U), and one for red-difference chrominance (V). In this format, for every 2×2 block of luma pixels (i.e. 4 pixels), there is only 1 U sample and 1 V sample. This reduction in chrominance sampling is possible because the human visual system is more sensitive to brightness (luma) than to color details, which allows for efficient compression without a noticeable loss in perceived quality.
 
 For efficiency in modern CPU processing, each plane is padded so that its row length is a multiple of 128 bytes. For instance, if you have an image row that is 224 bytes long, it will be padded with zeros until it reaches 384 bytes, ensuring optimal memory alignment and processing speed.
+
+One frame of 224x96@536fps video is stored as 
+- Y Plane: The expected row length is 224 bytes (1 byte per pixel), but each row is padded to 256 bytes (to  align to a 64-byte boundary). With 96 rows, the Y plane uses: 256 bytes/row × 96 rows = 24,576 bytes.
+- U and V Planes: In YUV420, the chroma channels are subsampled by 2 in both dimensions. That gives a resolution of 112×48 for each chroma plane. Each row in these planes is padded to 128 bytes. Thus, each chroma plane uses: 128 bytes/row × 48 rows = 6,144 bytes.
+So, one full frame is 24,576 (Y) + 6,144 (U) + 6,144 (V) = 36,864 bytes.
+
+When running a command such as:
+
+    rpicam-vid --no-raw --codec yuv420 --width 224 --height 96 --denoise cdn_off --framerate 536 -t 1000 -o tst.yuv420
+
+
+For example, to extract the first frame from the YUV file, use:
+
+    (echo -e "P5\n256 96\n255\n" && head --bytes $((256*96)) tst.yuv420) > frame.pgm
+
+And display it with:
+
+    pgmtoppm < frame.pgm | pnmtopng > frame.pgm.png
+
+Additional details and discussion about this issue are available on our project forum: https://forums.raspberrypi.com/viewtopic.php?p=2305225#p2305225
+
 
 ```C
 int align_up(int x, int y)
