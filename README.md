@@ -234,6 +234,9 @@ GScrop: https://gist.github.com/Hermann-SW/e6049fe1a24fc2b5a53c654e0e9f6b9c
 
 Trouble shooting (details about YUV padding issue): https://forums.raspberrypi.com/viewtopic.php?p=2305225#p2305225
 
+// frames up to 1456 width can be captured at 536 fps
+GScrop 1456 96 536 1500: https://forums.raspberrypi.com/viewtopic.php?p=2305205#p2305205
+
 ## Special thanks
 
 This project would not have been possible without the vital help of
