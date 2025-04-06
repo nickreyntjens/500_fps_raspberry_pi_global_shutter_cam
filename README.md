@@ -40,7 +40,7 @@ The objectives of this project are to:
 5. **Video Output/Display Setup:**  
    - A mini HDMI to HDMI adapter connected to the Raspberry Pi.
    - An HDMI to USB‑C cable feeds the signal into an M1 MacBook.
-   - OBS (Open Broadcaster Software) on the MacBook captures the USB‑C input, providing real-time viewing of the Raspberry Pi’s desktop.
+   - OBS (Open Broadcaster Software) on the MacBook captures the USB‑C input, providing real-time viewing of the Raspberry Pi’s desktop (Video Capture Device >> Properties >> Usb C).
 
 6. **Input Devices:**  
    A budget-friendly mouse and keyboard attached to the Raspberry Pi allow for direct control and configuration.
