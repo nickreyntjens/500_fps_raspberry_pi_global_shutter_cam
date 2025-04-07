@@ -18,6 +18,7 @@ if ! mountpoint -q "$RAMDISK"; then
     fi
 fi
 echo "Using RAM disk at: $RAMDISK"
+rm /dev/shm/*.yuv /dev/shm/*.mp4
 
 # --- Parameters ---
 ARCHIVE_NAME="$1"
