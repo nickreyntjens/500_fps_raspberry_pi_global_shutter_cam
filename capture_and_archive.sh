@@ -48,8 +48,14 @@ rpicam-vid --no-raw --codec yuv420 --width "$WIDTH" --height "$HEIGHT" --denoise
 echo "Captured YUV video to: $YUV_FILE"
 
 # --- Step 2: Convert YUV to MP4 ---
+# Calculate padded dimensions:
+# Next multiple of 64 for width, and next multiple of 16 for height.
+PAD_WIDTH=$(( (WIDTH + 63) / 64 * 64 ))
+PAD_HEIGHT=$(( (HEIGHT + 15) / 16 * 16 ))
+
+echo "Using padded dimensions: ${PAD_WIDTH}x${PAD_HEIGHT} for ffmpeg (source of trouble!)"
 echo "Converting captured YUV to MP4..."
-cat "$YUV_FILE" | ffmpeg -f rawvideo -vcodec rawvideo -s "${WIDTH}x${HEIGHT}" -r "$FRAMERATE" -pix_fmt yuv420p -i - \
+cat "$YUV_FILE" | ffmpeg -f rawvideo -vcodec rawvideo -s "${PAD_WIDTH}x${PAD_HEIGHT}" -r "$FRAMERATE" -pix_fmt yuv420p -i - \
     -c:v libx264 -preset slow -qp 0 -y "$MP4_FILE" -loglevel quiet
 echo "Converted MP4 video stored at: $MP4_FILE"
 
