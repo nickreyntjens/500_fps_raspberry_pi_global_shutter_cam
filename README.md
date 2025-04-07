@@ -31,22 +31,27 @@ The objectives of this project are to:
 2. **Raspberry Pi Global Shutter Camera**  
    This camera, available from Kiwi Electronics (see [Raspberry Pi Global Shutter Camera with C-mount](https://www.kiwi-electronics.com/en/raspberry-pi-global-shutter-camera-c-mount-11346?srsltid=AfmBOorjyt3xhTllkbBb9jNMj-0uA5owiSabHFzQiQZfjXykuc6Kj5gH)), ensures high-speed imaging with minimal motion blur—critical for capturing rapid insect movement.
 
-3. **M12 Lens (25 mm, F11.0)**  
+3. **Mipi adapter cable**
+   The Raspberry Pi 5 features two 4-lane MIPI connectors that can each support a camera or a display. The raspberry pi 5 needs needs a 22-pin, 0.5 mm pitch "mini" FPC format and require adapter cables to connect to the 15-pin, 1 mm pitch "standard" connectors used by current Raspberry Pi global shutter camera.
+I got this one, with a practical 300 mm lenght: https://www.kiwi-electronics.com/nl/raspberry-pi-boards-behuizingen-uitbreidingen-en-accessoires-59/raspberry-pi-camera-accessoires-133/raspberry-pi-camera-kabel-standaard-mini-300mm-11589?_gl=1*90b1m1*_up*MQ..*_gs*MQ..&gclid=Cj0KCQjw782_BhDjARIsABTv_JB22q76rsb2PiUjIxUCV1TtOZBpVEm4bRD8W47EMQo0gKaySr4qlJIaAhH5EALw_wcB&gbraid=0AAAAADuMvuewH4cd9l0jb6U9qbYL3cOSa
+Warning: Do not connect or disconnect the mimi cable while to PI is powered on, this can damage the MIPI port (happened to me, one port fried).
+
+4. **M12 Lens (25 mm, F11.0)**  
    A fixed-focal-length lens from Scorpion Vision, chosen for its compatibility with the global shutter camera and its ability to deliver detailed images at high frame rates.
 
-4. **C/CS Mount to M12 Lens Adapter**  
+5. **C/CS Mount to M12 Lens Adapter**  
    This adapter allows the M12 lens to be securely attached to the camera’s C-mount port.
 
-5. **Video Output/Display Setup:**  
+6. **Video Output/Display Setup:**  
    - A mini HDMI to HDMI adapter connected to the Raspberry Pi.
    - Male to Male hdmi connector
    - An HDMI to USB‑C cable feeds the signal into an M1 MacBook. (Newhope Video Capture Card, 4K HDMI to USB C 3.0 Capture Card, 1080p HD 60fps Live)
    - OBS (Open Broadcaster Software) on the MacBook captures the USB‑C input, providing real-time viewing of the Raspberry Pi’s desktop (Video Capture Device >> Properties >> Usb C).
 
-6. **Input Devices:**  
+7. **Input Devices:**  
    A budget-friendly mouse and keyboard attached to the Raspberry Pi allow for direct control and configuration.
 
-7. **Power Supply:**  
+8. **Power Supply:**  
    The official Raspberry Pi power adapter is used to ensure stable power delivery, addressing issues experienced with alternative USB‑C power sources.
 
 ## Camera Configuration
