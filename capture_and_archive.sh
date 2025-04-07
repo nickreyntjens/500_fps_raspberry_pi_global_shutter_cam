@@ -41,12 +41,13 @@ BASENAME="captured_${WIDTH}x${HEIGHT}_${FRAMERATE}fps_${TIMESTAMP}"
 YUV_FILE="${RAMDISK}/${BASENAME}.yuv"
 MP4_FILE="${RAMDISK}/${BASENAME}.mp4"
 TAR_FILE="${RAMDISK}/${BASENAME}.tar.gz"
+LOG_FILE="${RAMDISK}/${BASENAME}.yuvlog"
 
 # --- Step 1: Capture YUV Video ---
 echo "Capturing YUV video..."
 chmod +x GScrop
 ./GScrop "$WIDTH" "$HEIGHT" "$FRAMERATE" 32
-rpicam-vid --no-raw --codec yuv420 --width "$WIDTH" --height "$HEIGHT" --denoise cdn_off --framerate "$FRAMERATE" -t "$CAPTURE_TIME" -o - 2>/dev/null > "$YUV_FILE"
+rpicam-vid -v 2 --no-raw --codec yuv420 --width "$WIDTH" --height "$HEIGHT" --denoise cdn_off --framerate "$FRAMERATE" -t "$CAPTURE_TIME" -o - 2>"$LOG_FILE" > "$YUV_FILE"
 echo "Captured YUV video to: $YUV_FILE"
 
 # --- Step 2: Convert YUV to MP4 ---
@@ -69,6 +70,7 @@ mkdir -p "$ARCHIVE_DIR"
 # Copy the raw YUV and MP4 files into the archive.
 cp "$YUV_FILE" "$ARCHIVE_DIR/"
 cp "$MP4_FILE" "$ARCHIVE_DIR/"
+cp "$LOG_FILE" "$ARCHIVE_DIR/"
 
 # Create a tar.gz archive of the YUV file.
 tar -czf "${ARCHIVE_DIR}/${BASENAME}.tar.gz" -C "$RAMDISK" "${BASENAME}.yuv"
