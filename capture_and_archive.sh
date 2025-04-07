@@ -49,7 +49,7 @@ echo "Captured YUV video to: $YUV_FILE"
 
 # --- Step 2: Convert YUV to MP4 ---
 echo "Converting captured YUV to MP4..."
-ffmpeg -f rawvideo -vcodec rawvideo -s "${WIDTH}x${HEIGHT}" -r "$FRAMERATE" -pix_fmt yuv420p -i "$YUV_FILE" \
+cat "$YUV_FILE" | ffmpeg -f rawvideo -vcodec rawvideo -s "${WIDTH}x${HEIGHT}" -r "$FRAMERATE" -pix_fmt yuv420p -i - \
     -c:v libx264 -preset slow -qp 0 -y "$MP4_FILE" -loglevel quiet
 echo "Converted MP4 video stored at: $MP4_FILE"
 
