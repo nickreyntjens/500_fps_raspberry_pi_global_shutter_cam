@@ -78,17 +78,18 @@ This command will list the cameras recognized by libcamera. Ensure that your glo
    ```
 
    *Note:* Remove the `-n` flag from `rpicam-vid` if you want a live preview (at the cost of a lower frame rate).
-   *Note:* IMPORTANT: ffmpeg get input format 256x96, although rpicam-vid request has 224x96! This is due to padding, see below.
+
+   *Note:* 256x96 vs 224x96!: ffmpeg get input format 256x96, although rpicam-vid request has 224x96! This is due to padding, see below.
    If you get a flickering green mp4 video out of ffmpeg, this is the cause.
 
-2. **Real-Time Insect Tracking and Mirror Steering**  
+3. **Real-Time Insect Tracking and Mirror Steering**  
    A lightweight processing program receives the piped YUV stream and performs:
    - Insect detection and tracking.
    - Calculation of positional error relative to the center of the viewport.
    - Generation of correction commands via a PID controller.
    - Output of these commands to servos controlling a mirror, ensuring that the insect remains centered in the frame.
 
-3. **Modified Stream Output and Storage Optimization**  
+4. **Modified Stream Output and Storage Optimization**  
    The processed video stream is encoded using FFmpeg (with lossless H.264 settings) and written to disk as `tst.mp4` for offline analysis. To minimize disk I/O latency and efficiently handle the high data rate, the output files are written to a RAM disk.
 
    **Setting Up a RAM Disk on Linux:**
