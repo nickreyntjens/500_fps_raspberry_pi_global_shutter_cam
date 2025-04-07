@@ -78,6 +78,8 @@ This command will list the cameras recognized by libcamera. Ensure that your glo
    ```
 
    *Note:* Remove the `-n` flag from `rpicam-vid` if you want a live preview (at the cost of a lower frame rate).
+   *Note:* IMPORTANT: ffmpeg get input format 256x96, although rpicam-vid request has 224x96! This is due to padding, see below.
+   If you get a flickering green mp4 video out of ffmpeg, this is the cause.
 
 2. **Real-Time Insect Tracking and Mirror Steering**  
    A lightweight processing program receives the piped YUV stream and performs:
