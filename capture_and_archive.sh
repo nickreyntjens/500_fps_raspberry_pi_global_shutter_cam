@@ -43,6 +43,7 @@ TAR_FILE="${RAMDISK}/${BASENAME}.tar.gz"
 
 # --- Step 1: Capture YUV Video ---
 echo "Capturing YUV video..."
+chmod +x GScrop
 ./GScrop "$WIDTH" "$HEIGHT" "$FRAMERATE" 32
 rpicam-vid --no-raw --codec yuv420 --width "$WIDTH" --height "$HEIGHT" --denoise cdn_off --framerate "$FRAMERATE" -t "$CAPTURE_TIME" -o - 2>/dev/null > "$YUV_FILE"
 echo "Captured YUV video to: $YUV_FILE"
