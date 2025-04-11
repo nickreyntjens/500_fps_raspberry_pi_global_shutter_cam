@@ -30,6 +30,9 @@ The objectives of this project are to:
 
 2. **Raspberry Pi Global Shutter Camera**  
    This camera, available from Kiwi Electronics (see [Raspberry Pi Global Shutter Camera with C-mount](https://www.kiwi-electronics.com/en/raspberry-pi-global-shutter-camera-c-mount-11346?srsltid=AfmBOorjyt3xhTllkbBb9jNMj-0uA5owiSabHFzQiQZfjXykuc6Kj5gH)), ensures high-speed imaging with minimal motion blur—critical for capturing rapid insect movement.
+   Sensor: Sony IMX296 Sensor
+   Key specs: Diagonal 6.3mm, Pixel Size (Sensors):	3.4µm x 3.4µm, Resolution (Sensors):	1.58M
+
 
 3. **Mipi adapter cable**
    The Raspberry Pi 5 features two 4-lane MIPI connectors that can each support a camera or a display. The raspberry pi 5 needs needs a 22-pin, 0.5 mm pitch "mini" FPC format and require adapter cables to connect to the 15-pin, 1 mm pitch "standard" connectors used by current Raspberry Pi global shutter camera.
@@ -38,21 +41,36 @@ I got this one, with a practical 300 mm lenght:
 Warning: Do not connect or disconnect the mimi cable while to PI is powered on, this can damage the MIPI port (happened to me, one port fried).
 
 5. **M12 Lens (25 mm, F11.0)**  
-   A fixed-focal-length lens from Scorpion Vision, chosen for its compatibility with the global shutter camera and its ability to deliver detailed images at high frame rates.
+   A fixed-focal-length lens from Scorpion Vision, chosen for its compatibility with the global shutter camera and its ability to deliver detailed images at high frame rates. Key Features:
+Focal Length: 25mm
+F Number: F11
+Iris: Non-adjustable
+Mount: M12
+Format: 1/1.8"
+Megapixel: 3MP
+Horizontal Field of View: 15 Degrees
+Distortion: <0.1%
+Back Focus: 6.13mm
+Working Distance: 0.1m -1m
+Design Wavelength: 400-950nm
+Operating Temperature: -20° C ~ +65° C
+CRA: 6.55° 
+https://shop.scorpion.vision/products/m12-lens-25mm-f11
+   
 
-6. **C/CS Mount to M12 Lens Adapter**  
+7. **C/CS Mount to M12 Lens Adapter**  
    This adapter allows the M12 lens to be securely attached to the camera’s C-mount port.
 
-7. **Video Output/Display Setup:**  
+8. **Video Output/Display Setup:**  
    - A mini HDMI to HDMI adapter connected to the Raspberry Pi.
    - Male to Male hdmi connector
    - An HDMI to USB‑C cable feeds the signal into an M1 MacBook. (Newhope Video Capture Card, 4K HDMI to USB C 3.0 Capture Card, 1080p HD 60fps Live)
    - OBS (Open Broadcaster Software) on the MacBook captures the USB‑C input, providing real-time viewing of the Raspberry Pi’s desktop (Video Capture Device >> Properties >> Usb C).
 
-8. **Input Devices:**  
+9. **Input Devices:**  
    A budget-friendly mouse and keyboard attached to the Raspberry Pi allow for direct control and configuration.
 
-9. **Power Supply:**  
+10. **Power Supply:**  
    The official Raspberry Pi power adapter is used to ensure stable power delivery, addressing issues experienced with alternative USB‑C power sources.
 
 ## Camera Configuration
